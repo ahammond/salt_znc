@@ -1,6 +1,6 @@
 {% set packages = ('znc', 'znc-extra', 'znc-python') %}
 
-{% znc_backport = '/etc/apt/preferences.d/znc-backport.pref' %}
+{% set znc_backport = '/etc/apt/preferences.d/znc-backport.pref' %}
 {{ znc_backport }}:
   file.managed:
     - source: salt://znc/files{{ znc_backport }}
