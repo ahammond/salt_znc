@@ -1,4 +1,4 @@
-{% set packages = tuple('znc', 'znc-extra', 'znc-python') %}
+{% set packages = (tuple('znc', 'znc-extra', 'znc-python')) %}
 
 {% set znc_backport = '/etc/apt/preferences.d/znc-backport.pref' %}
 {{ znc_backport }}:
