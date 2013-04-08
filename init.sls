@@ -1,6 +1,6 @@
 #!pydsl
 
-znc_user = 'irc'
+znc_user = 'znc'
 packages = ['znc', 'znc-extra', 'znc-python']
 
 znc_backport = '/etc/apt/preferences.d/znc-backport.pref'
