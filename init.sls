@@ -23,4 +23,4 @@ state('irc')\
 state(irc_home_dir)\
   .file.directory(user='irc',
                   group='irc')\
-  .requires(file='irc')
+  .require(file='irc')
