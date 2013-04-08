@@ -1,5 +1,6 @@
 #!pydsl
 
+znc_user = 'irc'
 packages = ['znc', 'znc-extra', 'znc-python']
 
 znc_backport = '/etc/apt/preferences.d/znc-backport.pref'
@@ -12,15 +13,15 @@ state('znc')\
   .pkg.latest(pkgs=packages)\
   .require(file=znc_backport)
 
-irc_home_dir='/home/irc'
-state('irc')\
+home_dir = '/home/{}'.format(znc_user)
+state(znc_user)\
   .user.present(gid_from_name=True,
                 password='!',
                 system=True,
                 shell='/bin/bash',
-                home=irc_home_dir)
+                home=home_dir)
 
-state(irc_home_dir)\
-  .file.directory(user='irc',
-                  group='irc')\
-  .require(file='irc')
+state(home_dir)\
+  .file.directory(user=znc_user,
+                  group=znc_user)\
+  .require(user=znc_user)
