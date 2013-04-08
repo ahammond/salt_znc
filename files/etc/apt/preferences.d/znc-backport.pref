@@ -4,4 +4,4 @@ Pin: release a={{ grains['oscodename'] }}-backports
 Pin-Priority: 600
 
 {% endfor -%}
-{# vim: set filetype=sls: #}
+{# vim: set filetype=sls: -#}
