@@ -1,6 +1,6 @@
 #!pydsl
 
-packages = ('znc', 'znc-extra', 'znc-python')
+packages = ['znc', 'znc-extra', 'znc-python']
 
 znc_backport = '/etc/apt/preferences.d/znc-backport.pref'
 state(znc_backport)\
