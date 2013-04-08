@@ -11,3 +11,16 @@ state(znc_backport)\
 state('znc')\
   .pkg.latest(pkgs=packages)\
   .require(file=znc_backport)
+
+irc_home_dir='/home/irc'
+state('irc')\
+  .user.present(gid_from_name=True,
+                password='!',
+                system=True,
+                shell='/bin/bash',
+                home=irc_home_dir)
+
+state(irc_home_dir)\
+  .file.directory(user='irc',
+                  group='irc')\
+  .requires(file='irc')
