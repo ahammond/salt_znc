@@ -1,0 +1,7 @@
+{% for package in packages -%}
+Package: {{ package }}
+Pin: release a={{ grains['oscodename'] }}-backports
+Pin-Priority: 600
+
+{% endfor -%}
+{# vim: set filetype=sls: #}
