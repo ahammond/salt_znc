@@ -1,17 +1,13 @@
-{% set packages = (tuple('znc', 'znc-extra', 'znc-python')) %}
+#!pydsl
 
-{% set znc_backport = '/etc/apt/preferences.d/znc-backport.pref' %}
-{{ znc_backport }}:
-  file.managed:
-    - source: salt://znc/files{{ znc_backport }}
-    - template: jinja
-    - packages: {{ packages }}
+packages = ('znc', 'znc-extra', 'znc-python')
 
-znc:
-  pkg.latest:
-    - pkgs:
-      {% for package in packages %}
-      - {{ package }}
-      {% endfor %}
-    - require:
-      - file: {{ znc_backport }}
+znc_backport = '/etc/apt/preferences.d/znc-backport.pref'
+state(znc_backport)\
+  .file.managed(source='salt://znc/files{}'.format(znc_backport),
+                template='jinja',
+                packages=packages)
+
+state('znc')\
+  .pkg.latest(pkgs=packages)\
+  .require(file=znc_backport)
