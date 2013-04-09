@@ -55,5 +55,6 @@ state(conf_file)\
                 template='jinja',
                 znc_port=znc_port,
                 users=__pillar__['users'],
+                interesting_channels=interesting_channels,
                 freenode_servers=freenode_servers)\
   .require(user=znc_user)
