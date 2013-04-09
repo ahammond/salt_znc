@@ -66,3 +66,10 @@ state(upstart_file)\
                 template='jinja',
                 home_dir=home_dir,
                 znc_pid=znc_pid)
+
+state('znc')\
+  .service.running(enable=True,
+                   reload=True)\
+  .require(file=upstart_file,
+           pkg='znc-packages')\
+  .watch(file=conf_file)
