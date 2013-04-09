@@ -22,24 +22,14 @@ state(znc_user)\
                 shell='/bin/bash',
                 home=home_dir)
 
-state(home_dir)\
-  .file.directory(user=znc_user,
-                  group=znc_user)\
-  .require(user=znc_user)
-
-dot_znc = '{}/.znc'.format(home_dir)
-state(dot_znc)\
-  .file.directory(user=znc_user,
-                  group=znc_user)\
-  .require(file=home_dir)
-
-pem_file = '{}/znc.pem'.format(dot_znc)
+pem_file = '{}/.znc/znc.pem'.format(home_dir)
 state(pem_file)\
   .file.managed(source='salt://znc/files{}'.format(pem_file),
                 user=znc_user,
                 group=znc_user,
+                makedirs=True,
                 mode='0400')\
-  .require(file=dot_znc)
+  .require(user=znc_user)
 
 freenode_servers = [
     'asimov.freenode.net',
@@ -55,13 +45,13 @@ freenode_servers = [
 interesting_channels = [
     '##sr',
 ]
-conf_file = '{}/znc.conf'.format(dot_znc)
+conf_file = '{}/.znc/conf/znc.conf'.format(home_dir)
 state(conf_file)\
-  .file.managed(source='salt://znc/files{}'.format(pem_file),
+  .file.managed(source='salt://znc/files{}'.format(conf_file),
                 user=znc_user,
                 group=znc_user,
+                mkdirs=True,
                 mode='0400',
                 users=__pillar__['users'],
-                freenode_servers=freenode_servers
-            )\
-  .require(file=dot_znc)
+                freenode_servers=freenode_servers)\
+  .require(user=znc_user)
