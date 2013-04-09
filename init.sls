@@ -33,7 +33,7 @@ state(pem_file)\
   .require(user=znc_user)
 
 network_servers = {
-  freenode: [
+  'freenode': [
     'asimov.freenode.net',
     'card.freenode.net',
     'hubbard.freenode.net',
