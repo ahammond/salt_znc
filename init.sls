@@ -61,7 +61,7 @@ state(conf_file)\
                 user=znc_user,
                 group=znc_user,
                 mode='0400',
-                users=pillar['users'],
+                users=__pillar__['users'],
                 freenode_servers=freenode_servers
             )\
   .require(file=dot_znc)
