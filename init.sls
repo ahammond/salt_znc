@@ -52,7 +52,7 @@ state(conf_file)\
                 user=znc_user,
                 group=znc_user,
                 mkdirs=True,
-                mode='0400',
+                mode='0600',
                 template='jinja',
                 znc_port=znc_port,
                 users=__pillar__['users'],
