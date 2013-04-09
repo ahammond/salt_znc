@@ -52,6 +52,7 @@ state(conf_file)\
                 group=znc_user,
                 mkdirs=True,
                 mode='0400',
+                template='jinja',
                 users=__pillar__['users'],
                 freenode_servers=freenode_servers)\
   .require(user=znc_user)
