@@ -68,8 +68,7 @@ state(upstart_file)\
                 znc_pid=znc_pid)
 
 state('znc')\
-  .service.running(enable=True,
-                   reload=True)\
+  .service.running(enable=True)\
   .require(file=upstart_file,
            pkg='znc-packages')\
   .watch(file=conf_file)
