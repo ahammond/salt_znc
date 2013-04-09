@@ -30,7 +30,7 @@ state(home_dir)\
 dot_znc = '{}/.znc'.format(home_dir)
 state(dot_znc)\
   .file.directory(user=znc_user,
-                  group=znc_group)\
+                  group=znc_user)\
   .require(file=home_dir)
 
 pem_file = '{}/znc.pem'.format(dot_znc)
