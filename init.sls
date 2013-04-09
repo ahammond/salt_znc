@@ -1,6 +1,7 @@
 #!pydsl
 
 znc_user = 'znc'
+znc_port = '7000'
 packages = ['znc', 'znc-extra', 'znc-python']
 
 znc_backport = '/etc/apt/preferences.d/znc-backport.pref'
@@ -38,4 +39,29 @@ state(pem_file)\
                 user=znc_user,
                 group=znc_user,
                 mode='0400')\
+  .require(file=dot_znc)
+
+freenode_servers = [
+    'asimov.freenode.net',
+    'card.freenode.net',
+    'hubbard.freenode.net',
+    'moorcock.freenode.net',
+    'morgan.freenode.net',
+    'niven.freenode.net',
+    'verne.freenode.net',
+    'wright.freenode.net',
+    'zelazny.freenode.net',
+]
+interesting_channels = [
+    '##sr',
+]
+conf_file = '{}/znc.conf'.format(dot_znc)
+state(conf_file)\
+  .file.managed(source='salt://znc/files{}'.format(pem_file),
+                user=znc_user,
+                group=znc_user,
+                mode='0400',
+                users=pillar['users'],
+                freenode_servers=freenode_servers
+            )\
   .require(file=dot_znc)
