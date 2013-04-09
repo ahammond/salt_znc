@@ -32,7 +32,8 @@ state(pem_file)\
                 mode='0400')\
   .require(user=znc_user)
 
-freenode_servers = [
+network_servers = {
+  freenode: [
     'asimov.freenode.net',
     'card.freenode.net',
     'hubbard.freenode.net',
@@ -42,10 +43,9 @@ freenode_servers = [
     'verne.freenode.net',
     'wright.freenode.net',
     'zelazny.freenode.net',
-]
-interesting_channels = [
-    '##sr',
-]
+  ],
+}
+
 conf_file = '{}/.znc/configs/znc.conf'.format(home_dir)
 state(conf_file)\
   .file.managed(source='salt://znc/files{}'.format(conf_file),
@@ -56,8 +56,7 @@ state(conf_file)\
                 template='jinja',
                 znc_port=znc_port,
                 users=__pillar__['users'],
-                interesting_channels=interesting_channels,
-                freenode_servers=freenode_servers)\
+                network_servers=network_servers)\
   .require(user=znc_user)
 
 upstart_file = '/etc/init/znc.conf'
