@@ -2,6 +2,7 @@
 
 znc_user = 'znc'
 znc_port = '7000'
+znc_pid = '/var/run/znc.pid'
 packages = ['znc', 'znc-extra', 'znc-python']
 
 znc_backport = '/etc/apt/preferences.d/znc-backport.pref'
@@ -10,7 +11,7 @@ state(znc_backport)\
                 template='jinja',
                 packages=packages)
 
-state('znc')\
+state('znc-packages')\
   .pkg.latest(pkgs=packages)\
   .require(file=znc_backport)
 
@@ -58,3 +59,10 @@ state(conf_file)\
                 interesting_channels=interesting_channels,
                 freenode_servers=freenode_servers)\
   .require(user=znc_user)
+
+upstart_file = '/etc/init/znc.conf'
+state(upstart_file)\
+  .file.managed(source='salt://znc/files{}'.format(upstart_file),
+                template='jinja',
+                home_dir=home_dir,
+                pid_file=pid_file)
