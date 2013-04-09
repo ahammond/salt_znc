@@ -26,7 +26,7 @@ state(home_dir)\
                   group=znc_user)\
   .require(user=znc_user)
 
-pem_file = '{}/znc.pem'
+pem_file = '{}/znc.pem'.format(home_dir)
 state(pem_file)\
   .file.managed(source='salt://znc/files{}'.format(pem_file),
                 user=znc_user,
