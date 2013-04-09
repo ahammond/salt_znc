@@ -65,4 +65,4 @@ state(upstart_file)\
   .file.managed(source='salt://znc/files{}'.format(upstart_file),
                 template='jinja',
                 home_dir=home_dir,
-                pid_file=pid_file)
+                znc_pid=znc_pid)
