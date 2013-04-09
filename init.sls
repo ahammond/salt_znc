@@ -45,7 +45,7 @@ freenode_servers = [
 interesting_channels = [
     '##sr',
 ]
-conf_file = '{}/.znc/conf/znc.conf'.format(home_dir)
+conf_file = '{}/.znc/configs/znc.conf'.format(home_dir)
 state(conf_file)\
   .file.managed(source='salt://znc/files{}'.format(conf_file),
                 user=znc_user,
